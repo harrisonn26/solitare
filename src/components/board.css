@@ -1,6 +1,9 @@
 body {
 	background-color: rgb(200, 200, 200);
 }
+.table {
+	max-width: 1200px;
+}
 .card_slot {
 	width: 14.286vw;
 	height: calc(14.286 * 0.714);
