@@ -1,5 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Game } from "./game/gameTypes";
+import { deal } from "./store/gameSlice";
+import { useAppDispatch, useAppSelector } from "./store/store";
 
 export default function App() {
-	return <div>hello world</div>;
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(deal());
+	}, []);
+	const game: Game = useAppSelector((state) => state.game);
+	return (
+		<div>
+			{game.col1.map((card, i) => {
+				return <div key={i}>{card.get()}</div>;
+			})}
+		</div>
+	);
 }

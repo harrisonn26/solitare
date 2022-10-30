@@ -3,8 +3,8 @@ import { Suit, Value } from "./gameTypes";
 
 export default class Card {
 	constructor(
-		private suit: Suit,
 		private value: Value,
+		private suit: Suit,
 		private revealed: boolean
 	) {
 		this.suit = suit;
