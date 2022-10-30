@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Suit, Value } from "./gameTypes";
 
 //return SVG card according to value and suit
-export default function getCard(card: Card) {
+export function getCard(card: Card) {
 	if (!card.revealed) return cardBack;
 	else
 		return (
@@ -880,7 +880,7 @@ const getMiddle = (card: Card) => {
 	}
 };
 
-const cardBack = (
+export const cardBack = (
 	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
 		<rect width="250" height="350" rx="20" ry="20" fill="#005a9b" />
 		<path

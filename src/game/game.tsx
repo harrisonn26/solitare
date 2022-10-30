@@ -1,5 +1,4 @@
 import { Stack } from "./gameTypes";
-import Card from "./card";
 
 function getDeck() {
 	let currentIndex = cards.length,
