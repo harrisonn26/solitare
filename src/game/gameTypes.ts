@@ -1,6 +1,10 @@
-import Card from "./card";
 export type Suit = "diamond" | "heart" | "spade" | "club";
 export type Value = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+export type Card = {
+	value: Value;
+	suit: Suit;
+	revealed: boolean;
+};
 export type Stack = Array<Card>;
 export type Game = {
 	deck: Stack;
