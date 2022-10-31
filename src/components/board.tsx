@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Draggable from "react-draggable";
 import { getCard, cardBack } from "../game/card";
 import { Game, Stack } from "../game/gameTypes";
-import { deal } from "../store/gameSlice";
+import { deal, moveStack, stopMove } from "../store/gameSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./board.css";
 
@@ -25,17 +25,30 @@ export default function Board(props: BoardProps) {
 							if (i > 0) {
 								top = i * 30;
 							}
+							const z = card.posOffset.x === 0 ? i : i + 20;
 							return (
 								<Draggable
 									onStart={() => {
 										if (!card.revealed) return false;
 									}}
-									position={{ x: 0, y: 0 }}
+									onDrag={(e, pos) => {
+										dispatch(
+											moveStack({
+												stack: column,
+												index: i,
+												posOffset: { x: pos.x, y: pos.y },
+											})
+										);
+									}}
+									onStop={() => {
+										dispatch(stopMove(column));
+									}}
+									position={{ x: card.posOffset.x, y: card.posOffset.y }}
 								>
 									<div
 										style={{
 											position: "absolute",
-											zIndex: i,
+											zIndex: z,
 											left: 0,
 											right: 0,
 											top,

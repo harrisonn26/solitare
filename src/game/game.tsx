@@ -38,6 +38,7 @@ export default function dealer() {
 	column6.data[5].revealed = true;
 	column7.data[6].revealed = true;
 	column7.data[5].revealed = true;
+	column7.data[4].revealed = true;
 
 	return {
 		col1: column1,

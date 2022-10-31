@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import dealer from "../game/game";
-import { Game, StackMove } from "../game/gameTypes";
+import { Game, Stack, StackMove } from "../game/gameTypes";
 const gameSliceInitialState: Game = {
 	deck: { id: 0, data: [] },
 	col1: { id: 1, data: [] },
@@ -26,11 +26,54 @@ export const gameSlice = createSlice({
 			state.col7 = newDeck.col7;
 			state.deck = newDeck.deck;
 		},
-		moveStack: (state, action: PayloadAction<StackMove>) => {
-			const move = action.payload;
-			for (let i = move.index; i < move.stack.data.length - 1; i++) {}
+		moveStack: (state: Game, action: PayloadAction<StackMove>) => {
+			const move = JSON.parse(JSON.stringify(action.payload));
+			for (let i = move.index; i < move.stack.data.length; i++) {
+				move.stack.data[i].posOffset = move.posOffset;
+			}
+
+			state = updateStack(state, move.stack);
+		},
+		stopMove: (state: Game, action: PayloadAction<Stack>) => {
+			const posOffset = { x: 0, y: 0 };
+			const stack: Stack = JSON.parse(JSON.stringify(action.payload));
+			for (let i = 0; i < stack.data.length; i++) {
+				stack.data[i].posOffset = posOffset;
+			}
+			state = updateStack(state, stack);
 		},
 	},
 });
 
-export const { deal } = gameSlice.actions;
+const updateStack = (state: Game, stack: Stack) => {
+	switch (stack.id) {
+		case 0:
+			state.deck = stack;
+			return state;
+		case 1:
+			state.col1 = stack;
+			return state;
+		case 2:
+			state.col2 = stack;
+			return state;
+		case 3:
+			state.col3 = stack;
+			return state;
+		case 4:
+			state.col4 = stack;
+			return state;
+		case 5:
+			state.col5 = stack;
+			return state;
+		case 6:
+			state.col6 = stack;
+			return state;
+		case 7:
+			state.col7 = stack;
+			return state;
+		default:
+			return state;
+	}
+};
+
+export const { deal, moveStack, stopMove } = gameSlice.actions;
