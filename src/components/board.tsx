@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { getCard, cardBack, emptySlot } from "../game/card";
+import { getDroppedColumn } from "../game/game";
 import { Game, Stack } from "../game/gameTypes";
 import { deal, moveStack, stopMove } from "../store/gameSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
@@ -42,7 +43,8 @@ export default function Board(props: BoardProps) {
 											})
 										);
 									}}
-									onStop={() => {
+									onStop={(e, pos) => {
+										console.log(getDroppedColumn(column.id, pos.x));
 										dispatch(stopMove(column));
 									}}
 									position={{ x: card.posOffset.x, y: card.posOffset.y }}

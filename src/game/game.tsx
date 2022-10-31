@@ -1,4 +1,4 @@
-import { Stack } from "./gameTypes";
+import { ColumnCoords, Stack } from "./gameTypes";
 
 function getDeck() {
 	let currentIndex = cards.data.length,
@@ -111,3 +111,72 @@ const cards: Stack = {
 		{ value: 13, suit: "spade", revealed: false, posOffset },
 	],
 };
+export function getDroppedColumn(col: number, x: number): number {
+	const width = window.innerWidth;
+	let dropWindow: number = 75;
+	let move: number = 0;
+	const coords: ColumnCoords = {
+		col1: 100,
+		col2: 260,
+		col3: 440,
+		col4: 610,
+		col5: 780,
+		col6: 950,
+		col7: 1120,
+	};
+	if (width < 1220) {
+		coords.col1 = width / 12.2;
+		coords.col2 = width / 4.7;
+		coords.col3 = width / 2.8;
+		coords.col4 = width / 2;
+		coords.col5 = width / 1.6;
+		coords.col6 = width / 1.3;
+		coords.col7 = width / 1.1;
+		dropWindow = width / 16;
+	}
+	switch (col) {
+		case 1:
+			move = coords.col1 + x;
+			break;
+		case 2:
+			move = coords.col2 + x;
+			break;
+		case 3:
+			move = coords.col3 + x;
+			break;
+		case 4:
+			move = coords.col4 + x;
+			break;
+		case 5:
+			move = coords.col5 + x;
+			break;
+		case 6:
+			move = coords.col6 + x;
+			break;
+		case 7:
+			move = coords.col7 + x;
+			break;
+	}
+	if (move > coords.col1 - dropWindow && move < coords.col1 + dropWindow) {
+		return 1;
+	}
+	if (move > coords.col2 - dropWindow && move < coords.col2 + dropWindow) {
+		return 2;
+	}
+	if (move > coords.col3 - dropWindow && move < coords.col3 + dropWindow) {
+		return 3;
+	}
+	if (move > coords.col4 - dropWindow && move < coords.col4 + dropWindow) {
+		return 4;
+	}
+	if (move > coords.col5 - dropWindow && move < coords.col5 + dropWindow) {
+		return 5;
+	}
+	if (move > coords.col6 - dropWindow && move < coords.col6 + dropWindow) {
+		return 6;
+	}
+	if (move > coords.col7 - dropWindow && move < coords.col7 + dropWindow) {
+		return 7;
+	}
+	return 0;
+}

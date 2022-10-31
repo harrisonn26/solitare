@@ -30,3 +30,12 @@ export type StackMove = {
 		y: number;
 	};
 };
+export type ColumnCoords = {
+	col1: number;
+	col2: number;
+	col3: number;
+	col4: number;
+	col5: number;
+	col6: number;
+	col7: number;
+};
