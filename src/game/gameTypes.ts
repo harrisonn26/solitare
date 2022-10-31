@@ -4,8 +4,13 @@ export type Card = {
 	value: Value;
 	suit: Suit;
 	revealed: boolean;
+	posOffset: {
+		//for dragging stacks
+		x: number;
+		y: number;
+	};
 };
-export type Stack = Array<Card>;
+export type Stack = { id: number; data: Array<Card> };
 export type Game = {
 	deck: Stack;
 	col1: Stack;
@@ -15,4 +20,13 @@ export type Game = {
 	col5: Stack;
 	col6: Stack;
 	col7: Stack;
+};
+
+export type StackMove = {
+	stack: Stack;
+	index: number;
+	posOffset: {
+		x: number;
+		y: number;
+	};
 };

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Draggable from "react-draggable";
 import { getCard, cardBack } from "../game/card";
 import { Game, Stack } from "../game/gameTypes";
 import { deal } from "../store/gameSlice";
@@ -18,25 +19,32 @@ export default function Board(props: BoardProps) {
 	const renderColumn = (column: Stack) => {
 		return (
 			<div style={{ position: "relative" }}>
-				{column.length > 0
-					? column.map((card, i) => {
+				{column.data.length > 0
+					? column.data.map((card, i) => {
 							let top = 0;
 							if (i > 0) {
 								top = i * 30;
 							}
 							return (
-								<div
-									style={{
-										position: "absolute",
-										zIndex: i,
-										left: 0,
-										right: 0,
-										top,
-										bottom: 0,
+								<Draggable
+									onStart={() => {
+										if (!card.revealed) return false;
 									}}
+									position={{ x: 0, y: 0 }}
 								>
-									{getCard(card)}
-								</div>
+									<div
+										style={{
+											position: "absolute",
+											zIndex: i,
+											left: 0,
+											right: 0,
+											top,
+											bottom: 0,
+										}}
+									>
+										{getCard(card)}
+									</div>
+								</Draggable>
 							);
 					  })
 					: emptySlot}
@@ -48,7 +56,7 @@ export default function Board(props: BoardProps) {
 		<table className="table">
 			<tr>
 				<td className="card_slot">
-					{game.deck.length > 0 ? cardBack : emptySlot}
+					{game.deck.data.length > 0 ? cardBack : emptySlot}
 				</td>
 				<td className="card_slot">{emptySlot}</td>
 				<td className="card_slot"></td>

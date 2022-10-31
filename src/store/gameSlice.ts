@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import dealer from "../game/game";
-import { Game } from "../game/gameTypes";
+import { Game, StackMove } from "../game/gameTypes";
 const gameSliceInitialState: Game = {
-	col1: [],
-	col2: [],
-	col3: [],
-	col4: [],
-	col5: [],
-	col6: [],
-	col7: [],
-	deck: [],
+	deck: { id: 0, data: [] },
+	col1: { id: 1, data: [] },
+	col2: { id: 2, data: [] },
+	col3: { id: 3, data: [] },
+	col4: { id: 4, data: [] },
+	col5: { id: 5, data: [] },
+	col6: { id: 6, data: [] },
+	col7: { id: 7, data: [] },
 };
 export const gameSlice = createSlice({
 	name: "game",
@@ -25,6 +25,10 @@ export const gameSlice = createSlice({
 			state.col6 = newDeck.col6;
 			state.col7 = newDeck.col7;
 			state.deck = newDeck.deck;
+		},
+		moveStack: (state, action: PayloadAction<StackMove>) => {
+			const move = action.payload;
+			for (let i = move.index; i < move.stack.data.length - 1; i++) {}
 		},
 	},
 });
