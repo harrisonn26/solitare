@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import dealer from "../game/game";
-import { Game, Stack, StackMove, StopMove } from "../game/gameTypes";
+import {
+	Card,
+	Game,
+	Stack,
+	StackMove,
+	StopMove,
+	Suit,
+} from "../game/gameTypes";
 const gameSliceInitialState: Game = {
 	deck: { id: 0, data: [] },
 	col1: { id: 1, data: [] },
@@ -45,17 +52,100 @@ export const gameSlice = createSlice({
 			state = updateStack(state, stack);
 
 			if (dropId && dropId !== stack.id) {
-				const toMove = stack.data.splice(index);
-				if (stack.data.length > 0)
-					stack.data[stack.data.length - 1].revealed = true;
-				state = updateStack(state, stack);
-				state = addToStack(state, { id: dropId, data: toMove });
+				if (checkMove(state, dropId, stack.data[index])) {
+					const toMove = stack.data.splice(index);
+					if (stack.data.length > 0)
+						stack.data[stack.data.length - 1].revealed = true;
+					state = updateStack(state, stack);
+					state = addToStack(state, { id: dropId, data: toMove });
+				}
 			}
 		},
 	},
 });
 
-const addToStack = (state: Game, stack: Stack) => {
+const checkSuit = (suit1: Suit, suit2: Suit): boolean => {
+	return (
+		((suit1 === "heart" || suit1 === "diamond") &&
+			(suit2 === "club" || suit2 === "spade")) ||
+		((suit1 === "club" || suit1 === "spade") &&
+			(suit2 === "heart" || suit2 === "diamond"))
+	);
+};
+
+const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
+	switch (toStack) {
+		case 1:
+			if (state.col1.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col1.data[state.col1.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col1.data[state.col1.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
+		case 2:
+			return (
+				checkSuit(
+					state.col2.data[state.col2.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col2.data[state.col2.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		case 3:
+			return (
+				checkSuit(
+					state.col3.data[state.col3.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col3.data[state.col3.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		case 4:
+			return (
+				checkSuit(
+					state.col4.data[state.col4.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col4.data[state.col4.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		case 5:
+			return (
+				checkSuit(
+					state.col5.data[state.col5.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col5.data[state.col5.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		case 6:
+			return (
+				checkSuit(
+					state.col6.data[state.col6.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col6.data[state.col6.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		case 7:
+			return (
+				checkSuit(
+					state.col7.data[state.col7.data.length - 1].suit,
+					cardToMove.suit
+				) &&
+				state.col7.data[state.col7.data.length - 1].value - 1 ===
+					cardToMove.value
+			);
+		default:
+			return false;
+	}
+};
+
+const addToStack = (state: Game, stack: Stack): Game => {
 	switch (stack.id) {
 		case 1:
 			state.col1 = { id: 1, data: state.col1.data.concat(stack.data) };
@@ -83,7 +173,7 @@ const addToStack = (state: Game, stack: Stack) => {
 	}
 };
 
-const updateStack = (state: Game, stack: Stack) => {
+const updateStack = (state: Game, stack: Stack): Game => {
 	switch (stack.id) {
 		case 0:
 			state.deck = stack;
