@@ -44,8 +44,13 @@ export default function Board(props: BoardProps) {
 										);
 									}}
 									onStop={(e, pos) => {
-										console.log(getDroppedColumn(column.id, pos.x));
-										dispatch(stopMove(column));
+										dispatch(
+											stopMove({
+												stack: column,
+												dropId: getDroppedColumn(column.id, pos.x),
+												index: i,
+											})
+										);
 									}}
 									position={{ x: card.posOffset.x, y: card.posOffset.y }}
 								>

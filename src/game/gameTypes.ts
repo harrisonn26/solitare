@@ -30,6 +30,11 @@ export type StackMove = {
 		y: number;
 	};
 };
+export type StopMove = {
+	stack: Stack;
+	dropId: number;
+	index: number;
+};
 export type ColumnCoords = {
 	col1: number;
 	col2: number;
