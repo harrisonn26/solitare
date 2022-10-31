@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import { getCard, cardBack } from "../game/card";
+import { getCard, cardBack, emptySlot } from "../game/card";
 import { Game, Stack } from "../game/gameTypes";
 import { deal, moveStack, stopMove } from "../store/gameSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./board.css";
 
-type BoardProps = {};
+type BoardProps = { width: number };
 
 export default function Board(props: BoardProps) {
 	const dispatch = useAppDispatch();
@@ -14,6 +14,7 @@ export default function Board(props: BoardProps) {
 	useEffect(() => {
 		dispatch(deal());
 	}, []);
+
 	const game: Game = useAppSelector((state) => state.game);
 
 	const renderColumn = (column: Stack) => {
@@ -23,7 +24,8 @@ export default function Board(props: BoardProps) {
 					? column.data.map((card, i) => {
 							let top = 0;
 							if (i > 0) {
-								top = i * 30;
+								if (props.width > 1300) top = i * 35;
+								else top = i * (props.width / 37);
 							}
 							const z = card.posOffset.x === 0 ? i : i + 20;
 							return (
@@ -90,16 +92,3 @@ export default function Board(props: BoardProps) {
 		</table>
 	);
 }
-const emptySlot = (
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
-		<rect
-			width="250"
-			height="350"
-			rx="20"
-			ry="20"
-			fill="none"
-			strokeWidth="1%"
-			stroke={"#555555"}
-		/>
-	</svg>
-);
