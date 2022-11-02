@@ -105,59 +105,71 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 						cardToMove.value
 				);
 		case 2:
-			return (
-				checkSuit(
-					state.col2.data[state.col2.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col2.data[state.col2.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col2.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col2.data[state.col2.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col2.data[state.col2.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 		case 3:
-			return (
-				checkSuit(
-					state.col3.data[state.col3.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col3.data[state.col3.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col3.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col3.data[state.col3.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col3.data[state.col3.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 		case 4:
-			return (
-				checkSuit(
-					state.col4.data[state.col4.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col4.data[state.col4.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col4.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col4.data[state.col4.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col4.data[state.col4.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 		case 5:
-			return (
-				checkSuit(
-					state.col5.data[state.col5.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col5.data[state.col5.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col5.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col5.data[state.col5.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col5.data[state.col5.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 		case 6:
-			return (
-				checkSuit(
-					state.col6.data[state.col6.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col6.data[state.col6.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col6.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col6.data[state.col6.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col6.data[state.col6.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 		case 7:
-			return (
-				checkSuit(
-					state.col7.data[state.col7.data.length - 1].suit,
-					cardToMove.suit
-				) &&
-				state.col7.data[state.col7.data.length - 1].value - 1 ===
-					cardToMove.value
-			);
+			if (state.col7.data.length === 0) return cardToMove.value === 13;
+			else
+				return (
+					checkSuit(
+						state.col7.data[state.col7.data.length - 1].suit,
+						cardToMove.suit
+					) &&
+					state.col7.data[state.col7.data.length - 1].value - 1 ===
+						cardToMove.value
+				);
 
 		default:
 			return false;
