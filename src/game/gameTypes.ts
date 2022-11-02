@@ -20,6 +20,7 @@ export type Game = {
 	col5: Stack;
 	col6: Stack;
 	col7: Stack;
+	flippedDeck: Stack;
 };
 
 export type StackMove = {

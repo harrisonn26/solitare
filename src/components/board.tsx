@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import { getCard, cardBack, emptySlot } from "../game/card";
+import { getCard, cardBack, emptySlot, emptyDeck } from "../game/card";
 import { getDroppedColumn } from "../game/game";
 import { Game, Stack } from "../game/gameTypes";
-import { deal, moveStack, stopMove } from "../store/gameSlice";
+import { deal, moveStack, stopMove, drawDeck } from "../store/gameSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./board.css";
 
@@ -18,13 +18,13 @@ export default function Board(props: BoardProps) {
 
 	const game: Game = useAppSelector((state) => state.game);
 
-	const renderColumn = (column: Stack) => {
+	const renderColumn = (column: Stack, cascade: boolean) => {
 		return (
 			<div style={{ position: "relative" }}>
 				{column.data.length > 0
 					? column.data.map((card, i) => {
 							let top = 0;
-							if (i > 0) {
+							if (i > 0 && cascade) {
 								if (props.width > 1300) top = i * 35;
 								else top = i * (props.width / 37);
 							}
@@ -78,9 +78,23 @@ export default function Board(props: BoardProps) {
 		<table className="table">
 			<tr>
 				<td className="card_slot">
-					{game.deck.data.length > 0 ? cardBack : emptySlot}
+					{game.deck.data.length > 0 ? (
+						<div
+							onClick={() => {
+								dispatch(drawDeck());
+							}}
+						>
+							{cardBack}
+						</div>
+					) : (
+						<div onClick={() => dispatch(drawDeck())}>{emptyDeck}</div>
+					)}
 				</td>
-				<td className="card_slot">{emptySlot}</td>
+				<td className="card_slot">
+					{game.flippedDeck.data.length > 0
+						? renderColumn(game.flippedDeck, false)
+						: emptySlot}
+				</td>
 				<td className="card_slot"></td>
 				<td className="card_slot">{emptySlot}</td>
 				<td className="card_slot">{emptySlot}</td>
@@ -88,13 +102,13 @@ export default function Board(props: BoardProps) {
 				<td className="card_slot">{emptySlot}</td>
 			</tr>
 			<tr>
-				<td className="card_slot">{renderColumn(game.col1)}</td>
-				<td className="card_slot">{renderColumn(game.col2)}</td>
-				<td className="card_slot">{renderColumn(game.col3)}</td>
-				<td className="card_slot">{renderColumn(game.col4)}</td>
-				<td className="card_slot">{renderColumn(game.col5)}</td>
-				<td className="card_slot">{renderColumn(game.col6)}</td>
-				<td className="card_slot">{renderColumn(game.col7)}</td>
+				<td className="card_slot">{renderColumn(game.col1, true)}</td>
+				<td className="card_slot">{renderColumn(game.col2, true)}</td>
+				<td className="card_slot">{renderColumn(game.col3, true)}</td>
+				<td className="card_slot">{renderColumn(game.col4, true)}</td>
+				<td className="card_slot">{renderColumn(game.col5, true)}</td>
+				<td className="card_slot">{renderColumn(game.col6, true)}</td>
+				<td className="card_slot">{renderColumn(game.col7, true)}</td>
 			</tr>
 		</table>
 	);

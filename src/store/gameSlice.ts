@@ -17,11 +17,13 @@ const gameSliceInitialState: Game = {
 	col5: { id: 5, data: [] },
 	col6: { id: 6, data: [] },
 	col7: { id: 7, data: [] },
+	flippedDeck: { id: 8, data: [] },
 };
 export const gameSlice = createSlice({
 	name: "game",
 	initialState: gameSliceInitialState,
 	reducers: {
+		//populate the game state with a deck of randomly shuffled cards
 		deal: (state) => {
 			const newDeck = dealer();
 			state.col1 = newDeck.col1;
@@ -33,6 +35,7 @@ export const gameSlice = createSlice({
 			state.col7 = newDeck.col7;
 			state.deck = newDeck.deck;
 		},
+		//updates the x, y position of cards that are being dragged in a stack
 		moveStack: (state: Game, action: PayloadAction<StackMove>) => {
 			const move = JSON.parse(JSON.stringify(action.payload));
 			for (let i = move.index; i < move.stack.data.length; i++) {
@@ -41,6 +44,7 @@ export const gameSlice = createSlice({
 
 			state = updateStack(state, move.stack);
 		},
+		//Check move validity, move cards between stacks if necessary and reset position values
 		stopMove: (state: Game, action: PayloadAction<StopMove>) => {
 			const posOffset = { x: 0, y: 0 };
 			const dropId: number = action.payload.dropId;
@@ -59,6 +63,20 @@ export const gameSlice = createSlice({
 					state = updateStack(state, stack);
 					state = addToStack(state, { id: dropId, data: toMove });
 				}
+			}
+		},
+		//draw a new card from the deck to the flippedDeck
+		drawDeck: (state: Game) => {
+			const deck = state.deck;
+			const flippedDeck = state.flippedDeck;
+			if (state.deck.data.length > 0) {
+				const flippedCard = deck.data.pop();
+				flippedDeck.data.push(flippedCard!);
+				state.deck = deck;
+				state.flippedDeck = flippedDeck;
+			} else {
+				state.deck.data = flippedDeck.data.reverse();
+				state.flippedDeck.data = [];
 			}
 		},
 	},
@@ -140,6 +158,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 				state.col7.data[state.col7.data.length - 1].value - 1 ===
 					cardToMove.value
 			);
+
 		default:
 			return false;
 	}
@@ -199,9 +218,12 @@ const updateStack = (state: Game, stack: Stack): Game => {
 		case 7:
 			state.col7 = stack;
 			return state;
+		case 8:
+			state.flippedDeck = stack;
+			return state;
 		default:
 			return state;
 	}
 };
 
-export const { deal, moveStack, stopMove } = gameSlice.actions;
+export const { deal, moveStack, stopMove, drawDeck } = gameSlice.actions;

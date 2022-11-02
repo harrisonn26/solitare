@@ -37,8 +37,9 @@ export default function dealer() {
 	column5.data[4].revealed = true;
 	column6.data[5].revealed = true;
 	column7.data[6].revealed = true;
-	column7.data[5].revealed = true;
-	column7.data[4].revealed = true;
+	for (let i in deck.data) {
+		deck.data[i].revealed = true;
+	}
 
 	return {
 		col1: column1,
@@ -156,6 +157,11 @@ export function getDroppedColumn(col: number, x: number): number {
 		case 7:
 			move = coords.col7 + x;
 			break;
+		case 8:
+			move = coords.col2 + x;
+			break;
+		default:
+			return -1;
 	}
 	if (move > coords.col1 - dropWindow && move < coords.col1 + dropWindow) {
 		return 1;

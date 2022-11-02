@@ -918,3 +918,24 @@ export const emptySlot = (
 		/>
 	</svg>
 );
+export const emptyDeck = (
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
+		<rect
+			width="250"
+			height="350"
+			rx="20"
+			ry="20"
+			fill="none"
+			strokeWidth="1%"
+			stroke={"#555555"}
+		/>
+		<circle
+			cx="125"
+			cy="175"
+			r="50"
+			fill="none"
+			strokeWidth="1%"
+			stroke={"#555555"}
+		/>
+	</svg>
+);
