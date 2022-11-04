@@ -18,6 +18,10 @@ const gameSliceInitialState: Game = {
 	col6: { id: 6, data: [] },
 	col7: { id: 7, data: [] },
 	flippedDeck: { id: 8, data: [] },
+	home1: { id: 14, data: [] },
+	home2: { id: 15, data: [] },
+	home3: { id: 16, data: [] },
+	home4: { id: 17, data: [] },
 };
 export const gameSlice = createSlice({
 	name: "game",
@@ -90,7 +94,6 @@ const checkSuit = (suit1: Suit, suit2: Suit): boolean => {
 			(suit2 === "heart" || suit2 === "diamond"))
 	);
 };
-
 const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 	switch (toStack) {
 		case 1:
@@ -170,7 +173,42 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col7.data[state.col7.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-
+		case 14:
+			if (state.home1.data.length === 0) return cardToMove.value === 1;
+			else
+				return (
+					state.home1.data[state.home1.data.length - 1].suit ===
+						cardToMove.suit &&
+					state.home1.data[state.home1.data.length - 1].value + 1 ===
+						cardToMove.value
+				);
+		case 15:
+			if (state.home2.data.length === 0) return cardToMove.value === 1;
+			else
+				return (
+					state.home2.data[state.home2.data.length - 1].suit ===
+						cardToMove.suit &&
+					state.home2.data[state.home2.data.length - 1].value + 1 ===
+						cardToMove.value
+				);
+		case 16:
+			if (state.home3.data.length === 0) return cardToMove.value === 1;
+			else
+				return (
+					state.home3.data[state.home3.data.length - 1].suit ===
+						cardToMove.suit &&
+					state.home3.data[state.home3.data.length - 1].value + 1 ===
+						cardToMove.value
+				);
+		case 17:
+			if (state.home4.data.length === 0) return cardToMove.value === 1;
+			else
+				return (
+					state.home4.data[state.home4.data.length - 1].suit ===
+						cardToMove.suit &&
+					state.home4.data[state.home4.data.length - 1].value + 1 ===
+						cardToMove.value
+				);
 		default:
 			return false;
 	}
@@ -198,6 +236,18 @@ const addToStack = (state: Game, stack: Stack): Game => {
 			return state;
 		case 7:
 			state.col7 = { id: 7, data: state.col7.data.concat(stack.data) };
+			return state;
+		case 14:
+			state.home1 = { id: 14, data: state.home1.data.concat(stack.data) };
+			return state;
+		case 15:
+			state.home2 = { id: 15, data: state.home2.data.concat(stack.data) };
+			return state;
+		case 16:
+			state.home3 = { id: 16, data: state.home3.data.concat(stack.data) };
+			return state;
+		case 17:
+			state.home4 = { id: 17, data: state.home4.data.concat(stack.data) };
 			return state;
 		default:
 			return state;

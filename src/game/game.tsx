@@ -112,8 +112,14 @@ const cards: Stack = {
 		{ value: 13, suit: "spade", revealed: false, posOffset },
 	],
 };
-export function getDroppedColumn(col: number, x: number): number {
+export function getDroppedColumn(
+	col: number,
+	x: number,
+	y: number,
+	fromDeck: boolean
+): number {
 	const width = window.innerWidth;
+	let cardHeight = 224;
 	let dropWindow: number = 75;
 	let move: number = 0;
 	const coords: ColumnCoords = {
@@ -134,7 +140,9 @@ export function getDroppedColumn(col: number, x: number): number {
 		coords.col6 = width / 1.3;
 		coords.col7 = width / 1.1;
 		dropWindow = width / 16;
+		cardHeight = width * 0.2;
 	}
+
 	switch (col) {
 		case 1:
 			move = coords.col1 + x;
@@ -173,16 +181,21 @@ export function getDroppedColumn(col: number, x: number): number {
 		return 3;
 	}
 	if (move > coords.col4 - dropWindow && move < coords.col4 + dropWindow) {
-		return 4;
+		console.log("y", y, "cardHeight", cardHeight / 2, fromDeck);
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 14;
+		else return 4;
 	}
 	if (move > coords.col5 - dropWindow && move < coords.col5 + dropWindow) {
-		return 5;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 15;
+		else return 5;
 	}
 	if (move > coords.col6 - dropWindow && move < coords.col6 + dropWindow) {
-		return 6;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 16;
+		else return 6;
 	}
 	if (move > coords.col7 - dropWindow && move < coords.col7 + dropWindow) {
-		return 7;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 17;
+		else return 7;
 	}
 	return 0;
 }

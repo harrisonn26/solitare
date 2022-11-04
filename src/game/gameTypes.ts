@@ -21,6 +21,10 @@ export type Game = {
 	col6: Stack;
 	col7: Stack;
 	flippedDeck: Stack;
+	home1: Stack;
+	home2: Stack;
+	home3: Stack;
+	home4: Stack;
 };
 
 export type StackMove = {

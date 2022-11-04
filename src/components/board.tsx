@@ -47,7 +47,12 @@ export default function Board(props: BoardProps) {
 										dispatch(
 											stopMove({
 												stack: column,
-												dropId: getDroppedColumn(column.id, pos.x),
+												dropId: getDroppedColumn(
+													column.id,
+													pos.x,
+													pos.y + top,
+													!cascade
+												),
 												index: i,
 											})
 										);
@@ -96,10 +101,26 @@ export default function Board(props: BoardProps) {
 						: emptySlot}
 				</td>
 				<td className="card_slot"></td>
-				<td className="card_slot">{emptySlot}</td>
-				<td className="card_slot">{emptySlot}</td>
-				<td className="card_slot">{emptySlot}</td>
-				<td className="card_slot">{emptySlot}</td>
+				<td className="card_slot">
+					{game.home1.data.length === 0
+						? emptySlot
+						: getCard(game.home1.data[game.home1.data.length - 1])}
+				</td>
+				<td className="card_slot">
+					{game.home2.data.length === 0
+						? emptySlot
+						: getCard(game.home2.data[game.home2.data.length - 1])}
+				</td>
+				<td className="card_slot">
+					{game.home3.data.length === 0
+						? emptySlot
+						: getCard(game.home3.data[game.home3.data.length - 1])}
+				</td>
+				<td className="card_slot">
+					{game.home4.data.length === 0
+						? emptySlot
+						: getCard(game.home4.data[game.home4.data.length - 1])}
+				</td>
 			</tr>
 			<tr>
 				<td className="card_slot">{renderColumn(game.col1, true)}</td>

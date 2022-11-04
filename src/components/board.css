@@ -6,7 +6,6 @@ body {
 }
 .card_slot {
 	width: 14.286vw;
-	height: calc(14.286 * 0.714);
 	padding: 5px;
 	vertical-align: top;
 }
