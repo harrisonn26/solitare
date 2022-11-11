@@ -283,6 +283,18 @@ const updateStack = (state: Game, stack: Stack): Game => {
 		case 8:
 			state.flippedDeck = stack;
 			return state;
+		case 14:
+			state.home1 = stack;
+			return state;
+		case 15:
+			state.home2 = stack;
+			return state;
+		case 16:
+			state.home3 = stack;
+			return state;
+		case 17:
+			state.home4 = stack;
+			return state;
 		default:
 			return state;
 	}

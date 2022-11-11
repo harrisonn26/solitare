@@ -104,22 +104,22 @@ export default function Board(props: BoardProps) {
 				<td className="card_slot">
 					{game.home1.data.length === 0
 						? emptySlot
-						: getCard(game.home1.data[game.home1.data.length - 1])}
+						: renderColumn(game.home1, false)}
 				</td>
 				<td className="card_slot">
 					{game.home2.data.length === 0
 						? emptySlot
-						: getCard(game.home2.data[game.home2.data.length - 1])}
+						: renderColumn(game.home2, false)}
 				</td>
 				<td className="card_slot">
 					{game.home3.data.length === 0
 						? emptySlot
-						: getCard(game.home3.data[game.home3.data.length - 1])}
+						: renderColumn(game.home3, false)}
 				</td>
 				<td className="card_slot">
 					{game.home4.data.length === 0
 						? emptySlot
-						: getCard(game.home4.data[game.home4.data.length - 1])}
+						: renderColumn(game.home4, false)}
 				</td>
 			</tr>
 			<tr>

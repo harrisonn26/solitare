@@ -168,6 +168,18 @@ export function getDroppedColumn(
 		case 8:
 			move = coords.col2 + x;
 			break;
+		case 14:
+			move = coords.col4 + x;
+			break;
+		case 15:
+			move = coords.col5 + x;
+			break;
+		case 16:
+			move = coords.col6 + x;
+			break;
+		case 17:
+			move = coords.col7 + x;
+			break;
 		default:
 			return -1;
 	}
@@ -181,7 +193,6 @@ export function getDroppedColumn(
 		return 3;
 	}
 	if (move > coords.col4 - dropWindow && move < coords.col4 + dropWindow) {
-		console.log("y", y, "cardHeight", cardHeight / 2, fromDeck);
 		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 14;
 		else return 4;
 	}
