@@ -2,6 +2,7 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+	devtool: "eval-source-map",
 	entry: "./src/index.tsx",
 
 	output: {
