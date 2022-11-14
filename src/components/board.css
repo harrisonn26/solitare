@@ -3,6 +3,8 @@ body {
 }
 .table {
 	max-width: 1200px;
+	position: absolute;
+	top: 60px;
 }
 .card_slot {
 	width: 14.286vw;

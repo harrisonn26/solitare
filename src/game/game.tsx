@@ -1,6 +1,7 @@
 import { ColumnCoords, Stack } from "./gameTypes";
 
 function getDeck() {
+	const cards = JSON.parse(JSON.stringify(defaultDeck));
 	let currentIndex = cards.data.length,
 		randomIndex;
 
@@ -55,7 +56,7 @@ export default function dealer() {
 
 const posOffset = { x: 0, y: 0 };
 
-const cards: Stack = {
+const defaultDeck: Stack = {
 	id: -1,
 	data: [
 		{ value: 1, suit: "heart", revealed: false, posOffset },

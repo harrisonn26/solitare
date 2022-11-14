@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Board from "./components/board";
+import Header from "./components/header";
 export default function App() {
 	const [windowDimentions, setWindowDimentions] = useState({
 		width: innerWidth,
@@ -17,6 +18,7 @@ export default function App() {
 	}, []);
 	return (
 		<div>
+			<Header />
 			<Board width={windowDimentions.width} />
 		</div>
 	);
