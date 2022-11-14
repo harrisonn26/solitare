@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppDispatch } from "../store/store";
 import { deal } from "../store/gameSlice";
+import { ActionCreators } from "redux-undo";
 export default function Header() {
 	const dispatch = useAppDispatch();
 	return (
@@ -9,6 +10,13 @@ export default function Header() {
 				<div className="container-fluid">
 					<span className="navbar-brand mb-0 h1">Solitare</span>
 					<form className="d-flex">
+						<button
+							type="button"
+							className="btn btn-light"
+							onClick={() => dispatch(ActionCreators.undo())}
+						>
+							Undo
+						</button>
 						<button
 							type="button"
 							className="btn btn-primary"

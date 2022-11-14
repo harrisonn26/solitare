@@ -3,7 +3,7 @@ import Draggable from "react-draggable";
 import { getCard, cardBack, emptySlot, emptyDeck } from "../game/card";
 import { getDroppedColumn } from "../game/game";
 import { Game, Stack } from "../game/gameTypes";
-import { deal, moveStack, stopMove, drawDeck } from "../store/gameSlice";
+import { deal, stopMove, drawDeck, startMove } from "../store/gameSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./board.css";
 
@@ -16,7 +16,9 @@ export default function Board(props: BoardProps) {
 		dispatch(deal());
 	}, []);
 
-	const game: Game = useAppSelector((state) => state.game);
+	const [movingCoords, setMovingCoords] = useState({ x: 0, y: 0 });
+
+	const game: Game = useAppSelector((state) => state.present.game);
 
 	const renderColumn = (column: Stack, cascade: boolean) => {
 		return (
@@ -28,22 +30,18 @@ export default function Board(props: BoardProps) {
 								if (props.width > 1300) top = i * 35;
 								else top = i * (props.width / 37);
 							}
-							const z = card.posOffset.x === 0 ? i : i + 20;
+							const z = card.moving ? i + 20 : i;
 							return (
 								<Draggable
 									onStart={() => {
 										if (!card.revealed) return false;
+										dispatch(startMove({ index: i, stack: column }));
 									}}
 									onDrag={(e, pos) => {
-										dispatch(
-											moveStack({
-												stack: column,
-												index: i,
-												posOffset: { x: pos.x, y: pos.y },
-											})
-										);
+										setMovingCoords({ x: pos.x, y: pos.y });
 									}}
 									onStop={(e, pos) => {
+										setMovingCoords({ x: 0, y: 0 });
 										dispatch(
 											stopMove({
 												stack: column,
@@ -57,7 +55,10 @@ export default function Board(props: BoardProps) {
 											})
 										);
 									}}
-									position={{ x: card.posOffset.x, y: card.posOffset.y }}
+									position={{
+										x: card.moving ? movingCoords.x : 0,
+										y: card.moving ? movingCoords.y : 0,
+									}}
 								>
 									<div
 										style={{

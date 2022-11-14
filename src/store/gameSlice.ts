@@ -4,7 +4,7 @@ import {
 	Card,
 	Game,
 	Stack,
-	StackMove,
+	StartMove,
 	StopMove,
 	Suit,
 } from "../game/gameTypes";
@@ -39,11 +39,11 @@ export const gameSlice = createSlice({
 			state.col7 = newDeck.col7;
 			state.deck = newDeck.deck;
 		},
-		//updates the x, y position of cards that are being dragged in a stack
-		moveStack: (state: Game, action: PayloadAction<StackMove>) => {
+		//updates the status of cards to moving, so children in the stack can be moved
+		startMove: (state: Game, action: PayloadAction<StartMove>) => {
 			const move = JSON.parse(JSON.stringify(action.payload));
 			for (let i = move.index; i < move.stack.data.length; i++) {
-				move.stack.data[i].posOffset = move.posOffset;
+				move.stack.data[i].moving = true;
 			}
 
 			state = updateStack(state, move.stack);
@@ -55,7 +55,7 @@ export const gameSlice = createSlice({
 			const index: number = action.payload.index;
 			const stack: Stack = JSON.parse(JSON.stringify(action.payload.stack));
 			for (let i = 0; i < stack.data.length; i++) {
-				stack.data[i].posOffset = posOffset;
+				stack.data[i].moving = false;
 			}
 			state = updateStack(state, stack);
 
@@ -300,4 +300,4 @@ const updateStack = (state: Game, stack: Stack): Game => {
 	}
 };
 
-export const { deal, moveStack, stopMove, drawDeck } = gameSlice.actions;
+export const { deal, startMove, stopMove, drawDeck } = gameSlice.actions;
