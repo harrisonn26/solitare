@@ -85,6 +85,7 @@ export default function Board(props: BoardProps) {
 				<td className="card_slot">
 					{game.deck.data.length > 0 ? (
 						<div
+							style={{ padding: 0 }}
 							onClick={() => {
 								dispatch(drawDeck());
 							}}

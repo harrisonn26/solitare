@@ -881,61 +881,67 @@ const getMiddle = (card: Card) => {
 };
 
 export const cardBack = (
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
-		<rect width="250" height="350" rx="20" ry="20" fill="#005a9b" />
-		<path
-			d="M0,330 L0,200 Q50,204 80, 220 Q150,250 250,180 L250, 330 Q250,350 230,350 L20,350 Q 0,350 0,330"
-			fill="#00375e"
-		/>
-		<path
-			d="M60, 350 Q90, 260 140, 200 Q190, 145 200, 0 L230,0 Q250, 0 250,20 L250,330 Q250,350 230,350"
-			fill="white"
-			opacity="0.2"
-		/>
-		<rect
-			x="8"
-			y="8"
-			width="234"
-			height="334"
-			rx="12"
-			ry="12"
-			fill="none"
-			strokeWidth="1%"
-			stroke="#2a2a2a"
-		/>
-	</svg>
+	<div style={{ padding: 0 }}>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
+			<rect width="250" height="350" rx="20" ry="20" fill="#005a9b" />
+			<path
+				d="M0,330 L0,200 Q50,204 80, 220 Q150,250 250,180 L250, 330 Q250,350 230,350 L20,350 Q 0,350 0,330"
+				fill="#00375e"
+			/>
+			<path
+				d="M60, 350 Q90, 260 140, 200 Q190, 145 200, 0 L230,0 Q250, 0 250,20 L250,330 Q250,350 230,350"
+				fill="white"
+				opacity="0.2"
+			/>
+			<rect
+				x="8"
+				y="8"
+				width="234"
+				height="334"
+				rx="12"
+				ry="12"
+				fill="none"
+				strokeWidth="1%"
+				stroke="#2a2a2a"
+			/>
+		</svg>
+	</div>
 );
 export const emptySlot = (
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
-		<rect
-			width="250"
-			height="350"
-			rx="20"
-			ry="20"
-			fill="none"
-			strokeWidth="1%"
-			stroke={"#555555"}
-		/>
-	</svg>
+	<div style={{ padding: 0 }}>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
+			<rect
+				width="250"
+				height="350"
+				rx="20"
+				ry="20"
+				fill="none"
+				strokeWidth="1%"
+				stroke={"#555555"}
+			/>
+		</svg>
+	</div>
 );
 export const emptyDeck = (
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
-		<rect
-			width="250"
-			height="350"
-			rx="20"
-			ry="20"
-			fill="none"
-			strokeWidth="1%"
-			stroke={"#555555"}
-		/>
-		<circle
-			cx="125"
-			cy="175"
-			r="50"
-			fill="none"
-			strokeWidth="1%"
-			stroke={"#555555"}
-		/>
-	</svg>
+	<div style={{ padding: 0 }}>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 350">
+			<rect
+				width="250"
+				height="350"
+				rx="20"
+				ry="20"
+				fill="none"
+				strokeWidth="1%"
+				stroke={"#555555"}
+			/>
+			<circle
+				cx="125"
+				cy="175"
+				r="50"
+				fill="none"
+				strokeWidth="1%"
+				stroke={"#555555"}
+			/>
+		</svg>
+	</div>
 );
