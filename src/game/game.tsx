@@ -1,4 +1,4 @@
-import { ColumnCoords, Stack } from "./gameTypes";
+import { ColumnCoords, ColumnID, Stack } from "./gameTypes";
 
 function getDeck() {
 	const cards = JSON.parse(JSON.stringify(defaultDeck));
@@ -22,35 +22,35 @@ function getDeck() {
 }
 export default function dealer() {
 	const cards = getDeck();
-	const column1: Stack = { id: 1, data: cards.data.splice(0, 1) };
-	const column2: Stack = { id: 2, data: cards.data.splice(0, 2) };
-	const column3: Stack = { id: 3, data: cards.data.splice(0, 3) };
-	const column4: Stack = { id: 4, data: cards.data.splice(0, 4) };
-	const column5: Stack = { id: 5, data: cards.data.splice(0, 5) };
-	const column6: Stack = { id: 6, data: cards.data.splice(0, 6) };
-	const column7: Stack = { id: 7, data: cards.data.splice(0, 7) };
-	const deck: Stack = { id: 0, data: cards.data };
+	const col1: Stack = { id: ColumnID.col1, data: cards.data.splice(0, 1) };
+	const col2: Stack = { id: ColumnID.col2, data: cards.data.splice(0, 2) };
+	const col3: Stack = { id: ColumnID.col3, data: cards.data.splice(0, 3) };
+	const col4: Stack = { id: ColumnID.col4, data: cards.data.splice(0, 4) };
+	const col5: Stack = { id: ColumnID.col5, data: cards.data.splice(0, 5) };
+	const col6: Stack = { id: ColumnID.col6, data: cards.data.splice(0, 6) };
+	const col7: Stack = { id: ColumnID.col7, data: cards.data.splice(0, 7) };
+	const deck: Stack = { id: ColumnID.deck, data: cards.data };
 
-	column1.data[0].revealed = true;
-	column2.data[1].revealed = true;
-	column3.data[2].revealed = true;
-	column4.data[3].revealed = true;
-	column5.data[4].revealed = true;
-	column6.data[5].revealed = true;
-	column7.data[6].revealed = true;
+	col1.data[0].revealed = true;
+	col2.data[1].revealed = true;
+	col3.data[2].revealed = true;
+	col4.data[3].revealed = true;
+	col5.data[4].revealed = true;
+	col6.data[5].revealed = true;
+	col7.data[6].revealed = true;
 	for (let i in deck.data) {
 		deck.data[i].revealed = true;
 	}
 
 	return {
-		col1: column1,
-		col2: column2,
-		col3: column3,
-		col4: column4,
-		col5: column5,
-		col6: column6,
-		col7: column7,
-		deck: deck,
+		col1,
+		col2,
+		col3,
+		col4,
+		col5,
+		col6,
+		col7,
+		deck,
 	};
 }
 

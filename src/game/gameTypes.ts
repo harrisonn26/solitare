@@ -26,15 +26,6 @@ export type StartMove = {
 	stack: Stack;
 	index: number;
 };
-
-export type StackMove = {
-	stack: Stack;
-	index: number;
-	posOffset: {
-		x: number;
-		y: number;
-	};
-};
 export type StopMove = {
 	stack: Stack;
 	dropId: number;
@@ -49,3 +40,18 @@ export type ColumnCoords = {
 	col6: number;
 	col7: number;
 };
+export enum ColumnID {
+	col1,
+	col2,
+	col3,
+	col4,
+	col5,
+	col6,
+	col7,
+	deck,
+	flippedDeck,
+	home1,
+	home2,
+	home3,
+	home4,
+}

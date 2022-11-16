@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import dealer from "../game/game";
 import {
 	Card,
+	ColumnID,
 	Game,
 	Stack,
 	StartMove,
@@ -9,19 +10,19 @@ import {
 	Suit,
 } from "../game/gameTypes";
 const gameSliceInitialState: Game = {
-	deck: { id: 0, data: [] },
-	col1: { id: 1, data: [] },
-	col2: { id: 2, data: [] },
-	col3: { id: 3, data: [] },
-	col4: { id: 4, data: [] },
-	col5: { id: 5, data: [] },
-	col6: { id: 6, data: [] },
-	col7: { id: 7, data: [] },
-	flippedDeck: { id: 8, data: [] },
-	home1: { id: 14, data: [] },
-	home2: { id: 15, data: [] },
-	home3: { id: 16, data: [] },
-	home4: { id: 17, data: [] },
+	deck: { id: ColumnID.deck, data: [] },
+	col1: { id: ColumnID.col1, data: [] },
+	col2: { id: ColumnID.col2, data: [] },
+	col3: { id: ColumnID.col3, data: [] },
+	col4: { id: ColumnID.col4, data: [] },
+	col5: { id: ColumnID.col5, data: [] },
+	col6: { id: ColumnID.col6, data: [] },
+	col7: { id: ColumnID.col7, data: [] },
+	flippedDeck: { id: ColumnID.flippedDeck, data: [] },
+	home1: { id: ColumnID.home1, data: [] },
+	home2: { id: ColumnID.home2, data: [] },
+	home3: { id: ColumnID.home3, data: [] },
+	home4: { id: ColumnID.home4, data: [] },
 };
 export const gameSlice = createSlice({
 	name: "game",
@@ -216,38 +217,71 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 
 const addToStack = (state: Game, stack: Stack): Game => {
 	switch (stack.id) {
-		case 1:
-			state.col1 = { id: 1, data: state.col1.data.concat(stack.data) };
+		case ColumnID.col1:
+			state.col1 = {
+				id: ColumnID.col1,
+				data: state.col1.data.concat(stack.data),
+			};
 			return state;
-		case 2:
-			state.col2 = { id: 2, data: state.col2.data.concat(stack.data) };
+		case ColumnID.col2:
+			state.col2 = {
+				id: ColumnID.col2,
+				data: state.col2.data.concat(stack.data),
+			};
 			return state;
-		case 3:
-			state.col3 = { id: 3, data: state.col3.data.concat(stack.data) };
+		case ColumnID.col3:
+			state.col3 = {
+				id: ColumnID.col3,
+				data: state.col3.data.concat(stack.data),
+			};
 			return state;
-		case 4:
-			state.col4 = { id: 4, data: state.col4.data.concat(stack.data) };
+		case ColumnID.col4:
+			state.col4 = {
+				id: ColumnID.col4,
+				data: state.col4.data.concat(stack.data),
+			};
 			return state;
-		case 5:
-			state.col5 = { id: 5, data: state.col5.data.concat(stack.data) };
+		case ColumnID.col5:
+			state.col5 = {
+				id: ColumnID.col5,
+				data: state.col5.data.concat(stack.data),
+			};
 			return state;
-		case 6:
-			state.col6 = { id: 6, data: state.col6.data.concat(stack.data) };
+		case ColumnID.col6:
+			state.col6 = {
+				id: ColumnID.col6,
+				data: state.col6.data.concat(stack.data),
+			};
 			return state;
-		case 7:
-			state.col7 = { id: 7, data: state.col7.data.concat(stack.data) };
+		case ColumnID.col7:
+			state.col7 = {
+				id: ColumnID.col7,
+				data: state.col7.data.concat(stack.data),
+			};
 			return state;
-		case 14:
-			state.home1 = { id: 14, data: state.home1.data.concat(stack.data) };
+		case ColumnID.home1:
+			state.home1 = {
+				id: ColumnID.home1,
+				data: state.home1.data.concat(stack.data),
+			};
 			return state;
-		case 15:
-			state.home2 = { id: 15, data: state.home2.data.concat(stack.data) };
+		case ColumnID.home2:
+			state.home2 = {
+				id: ColumnID.home2,
+				data: state.home2.data.concat(stack.data),
+			};
 			return state;
-		case 16:
-			state.home3 = { id: 16, data: state.home3.data.concat(stack.data) };
+		case ColumnID.home3:
+			state.home3 = {
+				id: ColumnID.home3,
+				data: state.home3.data.concat(stack.data),
+			};
 			return state;
-		case 17:
-			state.home4 = { id: 17, data: state.home4.data.concat(stack.data) };
+		case ColumnID.home4:
+			state.home4 = {
+				id: ColumnID.home4,
+				data: state.home4.data.concat(stack.data),
+			};
 			return state;
 		default:
 			return state;
@@ -256,43 +290,43 @@ const addToStack = (state: Game, stack: Stack): Game => {
 
 const updateStack = (state: Game, stack: Stack): Game => {
 	switch (stack.id) {
-		case 0:
+		case ColumnID.deck:
 			state.deck = stack;
 			return state;
-		case 1:
+		case ColumnID.col1:
 			state.col1 = stack;
 			return state;
-		case 2:
+		case ColumnID.col2:
 			state.col2 = stack;
 			return state;
-		case 3:
+		case ColumnID.col3:
 			state.col3 = stack;
 			return state;
-		case 4:
+		case ColumnID.col4:
 			state.col4 = stack;
 			return state;
-		case 5:
+		case ColumnID.col5:
 			state.col5 = stack;
 			return state;
-		case 6:
+		case ColumnID.col6:
 			state.col6 = stack;
 			return state;
-		case 7:
+		case ColumnID.col7:
 			state.col7 = stack;
 			return state;
-		case 8:
+		case ColumnID.flippedDeck:
 			state.flippedDeck = stack;
 			return state;
-		case 14:
+		case ColumnID.home1:
 			state.home1 = stack;
 			return state;
-		case 15:
+		case ColumnID.home2:
 			state.home2 = stack;
 			return state;
-		case 16:
+		case ColumnID.home3:
 			state.home3 = stack;
 			return state;
-		case 17:
+		case ColumnID.home4:
 			state.home4 = stack;
 			return state;
 		default:
