@@ -1,4 +1,4 @@
-import { ColumnCoords, ColumnID, Stack } from "./gameTypes";
+import { ColumnCoords, ColumnID, Game, Stack } from "./gameTypes";
 
 function getDeck() {
 	const cards = JSON.parse(JSON.stringify(defaultDeck));
@@ -20,7 +20,7 @@ function getDeck() {
 
 	return cards;
 }
-export default function dealer() {
+export default function dealer(): Game {
 	const cards = getDeck();
 	const col1: Stack = { id: ColumnID.col1, data: cards.data.splice(0, 1) };
 	const col2: Stack = { id: ColumnID.col2, data: cards.data.splice(0, 2) };
@@ -30,7 +30,11 @@ export default function dealer() {
 	const col6: Stack = { id: ColumnID.col6, data: cards.data.splice(0, 6) };
 	const col7: Stack = { id: ColumnID.col7, data: cards.data.splice(0, 7) };
 	const deck: Stack = { id: ColumnID.deck, data: cards.data };
-
+	const flippedDeck: Stack = { id: ColumnID.flippedDeck, data: [] };
+	const home1: Stack = { id: ColumnID.home1, data: [] };
+	const home2: Stack = { id: ColumnID.home2, data: [] };
+	const home3: Stack = { id: ColumnID.home3, data: [] };
+	const home4: Stack = { id: ColumnID.home4, data: [] };
 	col1.data[0].revealed = true;
 	col2.data[1].revealed = true;
 	col3.data[2].revealed = true;
@@ -51,6 +55,11 @@ export default function dealer() {
 		col6,
 		col7,
 		deck,
+		flippedDeck,
+		home1,
+		home2,
+		home3,
+		home4,
 	};
 }
 
@@ -145,69 +154,73 @@ export function getDroppedColumn(
 	}
 
 	switch (col) {
-		case 1:
+		case ColumnID.col1:
 			move = coords.col1 + x;
 			break;
-		case 2:
+		case ColumnID.col2:
 			move = coords.col2 + x;
 			break;
-		case 3:
+		case ColumnID.col3:
 			move = coords.col3 + x;
 			break;
-		case 4:
+		case ColumnID.col4:
 			move = coords.col4 + x;
 			break;
-		case 5:
+		case ColumnID.col5:
 			move = coords.col5 + x;
 			break;
-		case 6:
+		case ColumnID.col6:
 			move = coords.col6 + x;
 			break;
-		case 7:
+		case ColumnID.col7:
 			move = coords.col7 + x;
 			break;
-		case 8:
+		case ColumnID.flippedDeck:
 			move = coords.col2 + x;
 			break;
-		case 14:
+		case ColumnID.home1:
 			move = coords.col4 + x;
 			break;
-		case 15:
+		case ColumnID.home2:
 			move = coords.col5 + x;
 			break;
-		case 16:
+		case ColumnID.home3:
 			move = coords.col6 + x;
 			break;
-		case 17:
+		case ColumnID.home4:
 			move = coords.col7 + x;
 			break;
 		default:
 			return -1;
 	}
 	if (move > coords.col1 - dropWindow && move < coords.col1 + dropWindow) {
-		return 1;
+		return ColumnID.col1;
 	}
 	if (move > coords.col2 - dropWindow && move < coords.col2 + dropWindow) {
-		return 2;
+		return ColumnID.col2;
 	}
 	if (move > coords.col3 - dropWindow && move < coords.col3 + dropWindow) {
-		return 3;
+		return ColumnID.col3;
 	}
 	if (move > coords.col4 - dropWindow && move < coords.col4 + dropWindow) {
-		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 14;
-		else return 4;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2))
+			return ColumnID.home1;
+		else return ColumnID.col4;
 	}
 	if (move > coords.col5 - dropWindow && move < coords.col5 + dropWindow) {
-		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 15;
-		else return 5;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2))
+			return ColumnID.home2;
+		else return ColumnID.col5;
 	}
 	if (move > coords.col6 - dropWindow && move < coords.col6 + dropWindow) {
-		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 16;
-		else return 6;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2))
+			return ColumnID.home3;
+		else return ColumnID.col6;
 	}
 	if (move > coords.col7 - dropWindow && move < coords.col7 + dropWindow) {
-		if (y < -cardHeight || (fromDeck && y < cardHeight / 2)) return 17;
-		else return 7;
+		if (y < -cardHeight || (fromDeck && y < cardHeight / 2))
+			return ColumnID.home4;
+		else return ColumnID.col7;
 	}
 	return 0;
 }

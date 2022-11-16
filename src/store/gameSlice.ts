@@ -39,6 +39,11 @@ export const gameSlice = createSlice({
 			state.col6 = newDeck.col6;
 			state.col7 = newDeck.col7;
 			state.deck = newDeck.deck;
+			state.flippedDeck = newDeck.flippedDeck;
+			state.home1 = newDeck.home1;
+			state.home2 = newDeck.home2;
+			state.home3 = newDeck.home3;
+			state.home4 = newDeck.home4;
 		},
 		//updates the status of cards to moving, so children in the stack can be moved
 		startMove: (state: Game, action: PayloadAction<StartMove>) => {
@@ -97,7 +102,7 @@ const checkSuit = (suit1: Suit, suit2: Suit): boolean => {
 };
 const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 	switch (toStack) {
-		case 1:
+		case ColumnID.col1:
 			if (state.col1.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -108,7 +113,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col1.data[state.col1.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 2:
+		case ColumnID.col2:
 			if (state.col2.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -119,7 +124,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col2.data[state.col2.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 3:
+		case ColumnID.col3:
 			if (state.col3.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -130,7 +135,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col3.data[state.col3.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 4:
+		case ColumnID.col4:
 			if (state.col4.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -141,7 +146,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col4.data[state.col4.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 5:
+		case ColumnID.col5:
 			if (state.col5.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -152,7 +157,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col5.data[state.col5.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 6:
+		case ColumnID.col6:
 			if (state.col6.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -163,7 +168,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col6.data[state.col6.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 7:
+		case ColumnID.col7:
 			if (state.col7.data.length === 0) return cardToMove.value === 13;
 			else
 				return (
@@ -174,7 +179,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.col7.data[state.col7.data.length - 1].value - 1 ===
 						cardToMove.value
 				);
-		case 14:
+		case ColumnID.home1:
 			if (state.home1.data.length === 0) return cardToMove.value === 1;
 			else
 				return (
@@ -183,7 +188,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.home1.data[state.home1.data.length - 1].value + 1 ===
 						cardToMove.value
 				);
-		case 15:
+		case ColumnID.home2:
 			if (state.home2.data.length === 0) return cardToMove.value === 1;
 			else
 				return (
@@ -192,7 +197,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.home2.data[state.home2.data.length - 1].value + 1 ===
 						cardToMove.value
 				);
-		case 16:
+		case ColumnID.home3:
 			if (state.home3.data.length === 0) return cardToMove.value === 1;
 			else
 				return (
@@ -201,7 +206,7 @@ const checkMove = (state: Game, toStack: number, cardToMove: Card): boolean => {
 					state.home3.data[state.home3.data.length - 1].value + 1 ===
 						cardToMove.value
 				);
-		case 17:
+		case ColumnID.home4:
 			if (state.home4.data.length === 0) return cardToMove.value === 1;
 			else
 				return (
