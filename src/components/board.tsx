@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import { getCard, cardBack, emptySlot, emptyDeck } from "../game/card";
+import { getCard, cardBack, emptyDeck } from "../game/card";
 import { getDroppedColumn } from "../game/game";
 import { Game, Stack } from "../game/gameTypes";
 import { deal, stopMove, drawDeck, startMove } from "../store/gameSlice";
@@ -22,60 +22,66 @@ export default function Board(props: BoardProps) {
 
 	const renderColumn = (column: Stack, cascade: boolean) => {
 		return (
-			<div style={{ position: "relative", padding: 0 }}>
-				{column.data.length > 0
-					? column.data.map((card, i) => {
-							let top = 0;
-							if (i > 0 && cascade) {
-								if (props.width > 1300) top = i * 35;
-								else top = i * (props.width / 37);
-							}
-							const z = card.moving ? i + 20 : i;
-							return (
-								<Draggable
-									onStart={() => {
-										if (!card.revealed) return false;
-										dispatch(startMove({ index: i, stack: column }));
-									}}
-									onDrag={(e, pos) => {
-										setMovingCoords({ x: pos.x, y: pos.y });
-									}}
-									onStop={(e, pos) => {
-										setMovingCoords({ x: 0, y: 0 });
-										dispatch(
-											stopMove({
-												stack: column,
-												dropId: getDroppedColumn(
-													column.id,
-													pos.x,
-													pos.y + top,
-													!cascade
-												),
-												index: i,
-											})
-										);
-									}}
-									position={{
-										x: card.moving ? movingCoords.x : 0,
-										y: card.moving ? movingCoords.y : 0,
-									}}
-								>
-									<div
-										style={{
-											position: "absolute",
-											zIndex: z,
-											left: 0,
-											right: 0,
-											top,
-											bottom: 0,
-										}}
-									>
-										{getCard(card)}
-									</div>
-								</Draggable>
-							);
-					  })
-					: emptySlot}
+			<div
+				style={{
+					position: "relative",
+					padding: 0,
+					boxShadow: "0px 0px 0px 2px white inset",
+					borderRadius: "14px",
+					height: 225,
+				}}
+			>
+				{column.data.map((card, i) => {
+					let top = 0;
+					if (i > 0 && cascade) {
+						if (props.width > 1300) top = i * 35;
+						else top = i * (props.width / 37);
+					}
+					const z = card.moving ? i + 20 : i;
+					return (
+						<Draggable
+							onStart={() => {
+								if (!card.revealed) return false;
+								dispatch(startMove({ index: i, stack: column }));
+							}}
+							onDrag={(e, pos) => {
+								setMovingCoords({ x: pos.x, y: pos.y });
+							}}
+							onStop={(e, pos) => {
+								setMovingCoords({ x: 0, y: 0 });
+								dispatch(
+									stopMove({
+										stack: column,
+										dropId: getDroppedColumn(
+											column.id,
+											pos.x,
+											pos.y + top,
+											!cascade
+										),
+										index: i,
+									})
+								);
+							}}
+							position={{
+								x: card.moving ? movingCoords.x : 0,
+								y: card.moving ? movingCoords.y : 0,
+							}}
+						>
+							<div
+								style={{
+									position: "absolute",
+									zIndex: z,
+									left: 0,
+									right: 0,
+									top,
+									bottom: 0,
+								}}
+							>
+								{getCard(card)}
+							</div>
+						</Draggable>
+					);
+				})}
 			</div>
 		);
 	};
@@ -86,7 +92,7 @@ export default function Board(props: BoardProps) {
 				<td className="card_slot">
 					{game.deck.data.length > 0 ? (
 						<div
-							style={{ padding: 0 }}
+							style={{ padding: 0, cursor: "pointer" }}
 							onClick={() => {
 								dispatch(drawDeck());
 							}}
@@ -94,7 +100,10 @@ export default function Board(props: BoardProps) {
 							{cardBack}
 						</div>
 					) : (
-						<div style={{ padding: 0 }} onClick={() => dispatch(drawDeck())}>
+						<div
+							style={{ padding: 0, cursor: "pointer" }}
+							onClick={() => dispatch(drawDeck())}
+						>
 							{emptyDeck}
 						</div>
 					)}
