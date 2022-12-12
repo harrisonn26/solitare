@@ -5,8 +5,11 @@ import { ActionCreators } from "redux-undo";
 export default function Header() {
 	const dispatch = useAppDispatch();
 	return (
-		<>
-			<nav className="navbar navbar-dark bg-dark">
+		<div style={{ width: "100%", backgroundColor: "rgba(34, 37, 41, 1)" }}>
+			<nav
+				className="navbar navbar-dark bg-dark"
+				style={{ maxWidth: 1200, margin: "0 auto" }}
+			>
 				<div className="container-fluid">
 					<span className="navbar-brand mb-0 h1">Solitare</span>
 					<form className="d-flex">
@@ -54,6 +57,6 @@ export default function Header() {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

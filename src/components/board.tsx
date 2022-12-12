@@ -27,8 +27,8 @@ export default function Board(props: BoardProps) {
 					position: "relative",
 					padding: 0,
 					boxShadow: "0px 0px 0px 2px white inset",
-					borderRadius: "14px",
-					height: 225,
+					borderRadius: "12px",
+					aspectRatio: 250 / 350,
 				}}
 			>
 				{column.data.map((card, i) => {

@@ -2,9 +2,8 @@ body {
 	background-color: #262c38;
 }
 .table {
+	margin: 0 auto;
 	max-width: 1200px;
-	position: absolute;
-	top: 60px;
 }
 .victory {
 	color: white;

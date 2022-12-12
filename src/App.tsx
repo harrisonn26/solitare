@@ -17,9 +17,9 @@ export default function App() {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 	return (
-		<div>
+		<>
 			<Header />
 			<Board width={windowDimentions.width} />
-		</div>
+		</>
 	);
 }
