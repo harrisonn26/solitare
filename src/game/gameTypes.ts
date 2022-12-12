@@ -41,7 +41,7 @@ export type ColumnCoords = {
 	col7: number;
 };
 export enum ColumnID {
-	col1,
+	col1 = 1,
 	col2,
 	col3,
 	col4,

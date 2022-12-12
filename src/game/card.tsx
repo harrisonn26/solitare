@@ -917,7 +917,7 @@ export const emptySlot = (
 				ry="20"
 				fill="none"
 				strokeWidth="1%"
-				stroke={"#555555"}
+				stroke={"#FFFFFF"}
 			/>
 		</svg>
 	</div>
@@ -932,7 +932,7 @@ export const emptyDeck = (
 				ry="20"
 				fill="none"
 				strokeWidth="1%"
-				stroke={"#555555"}
+				stroke={"#FFFFFF"}
 			/>
 			<circle
 				cx="125"
@@ -940,7 +940,7 @@ export const emptyDeck = (
 				r="50"
 				fill="none"
 				strokeWidth="1%"
-				stroke={"#555555"}
+				stroke={"#FFFFFF"}
 			/>
 		</svg>
 	</div>
