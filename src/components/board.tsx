@@ -22,7 +22,7 @@ export default function Board(props: BoardProps) {
 
 	const renderColumn = (column: Stack, cascade: boolean) => {
 		return (
-			<div style={{ position: "relative" }}>
+			<div style={{ position: "relative", padding: 0 }}>
 				{column.data.length > 0
 					? column.data.map((card, i) => {
 							let top = 0;
@@ -94,35 +94,17 @@ export default function Board(props: BoardProps) {
 							{cardBack}
 						</div>
 					) : (
-						<div onClick={() => dispatch(drawDeck())}>{emptyDeck}</div>
+						<div style={{ padding: 0 }} onClick={() => dispatch(drawDeck())}>
+							{emptyDeck}
+						</div>
 					)}
 				</td>
-				<td className="card_slot">
-					{game.flippedDeck.data.length > 0
-						? renderColumn(game.flippedDeck, false)
-						: emptySlot}
-				</td>
+				<td className="card_slot">{renderColumn(game.flippedDeck, false)}</td>
 				<td className="card_slot"></td>
-				<td className="card_slot">
-					{game.home1.data.length === 0
-						? emptySlot
-						: renderColumn(game.home1, false)}
-				</td>
-				<td className="card_slot">
-					{game.home2.data.length === 0
-						? emptySlot
-						: renderColumn(game.home2, false)}
-				</td>
-				<td className="card_slot">
-					{game.home3.data.length === 0
-						? emptySlot
-						: renderColumn(game.home3, false)}
-				</td>
-				<td className="card_slot">
-					{game.home4.data.length === 0
-						? emptySlot
-						: renderColumn(game.home4, false)}
-				</td>
+				<td className="card_slot">{renderColumn(game.home1, false)}</td>
+				<td className="card_slot">{renderColumn(game.home2, false)}</td>
+				<td className="card_slot">{renderColumn(game.home3, false)}</td>
+				<td className="card_slot">{renderColumn(game.home4, false)}</td>
 			</tr>
 			{game.completed ? (
 				<tr>
