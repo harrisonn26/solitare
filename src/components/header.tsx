@@ -13,7 +13,7 @@ export default function Header() {
 						<button
 							type="button"
 							className="btn btn-light"
-							onClick={() => dispatch(ActionCreators.undo())}
+							onClick={() => dispatch(ActionCreators.jump(-2))}
 						>
 							Undo
 						</button>
