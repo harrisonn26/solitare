@@ -60,6 +60,7 @@ export default function dealer(): Game {
 		home2,
 		home3,
 		home4,
+		completed: false,
 	};
 }
 

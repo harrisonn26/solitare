@@ -21,6 +21,7 @@ export type Game = {
 	home2: Stack;
 	home3: Stack;
 	home4: Stack;
+	completed: boolean;
 };
 export type StartMove = {
 	stack: Stack;

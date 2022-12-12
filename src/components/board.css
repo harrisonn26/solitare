@@ -6,6 +6,9 @@ body {
 	position: absolute;
 	top: 60px;
 }
+.victory {
+	color: white;
+}
 .card_slot {
 	width: 14.286vw;
 	padding: 5px;

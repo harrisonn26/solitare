@@ -23,6 +23,7 @@ const gameSliceInitialState: Game = {
 	home2: { id: ColumnID.home2, data: [] },
 	home3: { id: ColumnID.home3, data: [] },
 	home4: { id: ColumnID.home4, data: [] },
+	completed: false,
 };
 export const gameSlice = createSlice({
 	name: "game",
@@ -60,6 +61,8 @@ export const gameSlice = createSlice({
 			const dropId: number = action.payload.dropId;
 			const index: number = action.payload.index;
 			const stack: Stack = JSON.parse(JSON.stringify(action.payload.stack));
+
+			//set all cards to stationary
 			for (let i = 0; i < stack.data.length; i++) {
 				stack.data[i].moving = false;
 			}
@@ -73,6 +76,18 @@ export const gameSlice = createSlice({
 					state = updateStack(state, stack);
 					state = addToStack(state, { id: dropId, data: toMove });
 				}
+			}
+			if (
+				state.home1.data.length === 13 &&
+				state.home2.data.length === 13 &&
+				state.home3.data.length === 13 &&
+				state.home4.data.length === 13
+			) {
+				console.log("victory");
+
+				const completedState = state;
+				completedState.completed = true;
+				state = completedState;
 			}
 		},
 		//draw a new card from the deck to the flippedDeck

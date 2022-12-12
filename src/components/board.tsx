@@ -124,15 +124,21 @@ export default function Board(props: BoardProps) {
 						: renderColumn(game.home4, false)}
 				</td>
 			</tr>
-			<tr>
-				<td className="card_slot">{renderColumn(game.col1, true)}</td>
-				<td className="card_slot">{renderColumn(game.col2, true)}</td>
-				<td className="card_slot">{renderColumn(game.col3, true)}</td>
-				<td className="card_slot">{renderColumn(game.col4, true)}</td>
-				<td className="card_slot">{renderColumn(game.col5, true)}</td>
-				<td className="card_slot">{renderColumn(game.col6, true)}</td>
-				<td className="card_slot">{renderColumn(game.col7, true)}</td>
-			</tr>
+			{game.completed ? (
+				<tr>
+					<td className="victory">VICTORY</td>
+				</tr>
+			) : (
+				<tr>
+					<td className="card_slot">{renderColumn(game.col1, true)}</td>
+					<td className="card_slot">{renderColumn(game.col2, true)}</td>
+					<td className="card_slot">{renderColumn(game.col3, true)}</td>
+					<td className="card_slot">{renderColumn(game.col4, true)}</td>
+					<td className="card_slot">{renderColumn(game.col5, true)}</td>
+					<td className="card_slot">{renderColumn(game.col6, true)}</td>
+					<td className="card_slot">{renderColumn(game.col7, true)}</td>
+				</tr>
+			)}
 		</table>
 	);
 }
