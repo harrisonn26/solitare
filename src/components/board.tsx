@@ -87,39 +87,47 @@ export default function Board(props: BoardProps) {
 	};
 
 	return (
-		<table className="table">
-			<tr>
-				<td className="card_slot">
-					{game.deck.data.length > 0 ? (
+		<>
+			<table className="table">
+				<tr style={{ height: 236 }}>
+					<td className="card_slot">
 						<div
-							style={{ padding: 0, cursor: "pointer" }}
+							style={{
+								position: "relative",
+								padding: 0,
+								boxShadow: "0px 0px 0px 2px white inset",
+								borderRadius: "12px",
+								aspectRatio: 250 / 350,
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
 							onClick={() => {
 								dispatch(drawDeck());
 							}}
 						>
-							{cardBack}
+							{game.deck.data.length > 0 ? (
+								cardBack
+							) : (
+								<div
+									style={{
+										width: "50%",
+										aspectRatio: 1,
+										borderRadius: 100,
+										border: "2px solid #FFFFFF",
+									}}
+								/>
+							)}
 						</div>
-					) : (
-						<div
-							style={{ padding: 0, cursor: "pointer" }}
-							onClick={() => dispatch(drawDeck())}
-						>
-							{emptyDeck}
-						</div>
-					)}
-				</td>
-				<td className="card_slot">{renderColumn(game.flippedDeck, false)}</td>
-				<td className="card_slot"></td>
-				<td className="card_slot">{renderColumn(game.home1, false)}</td>
-				<td className="card_slot">{renderColumn(game.home2, false)}</td>
-				<td className="card_slot">{renderColumn(game.home3, false)}</td>
-				<td className="card_slot">{renderColumn(game.home4, false)}</td>
-			</tr>
-			{game.completed ? (
-				<tr>
-					<td className="victory">VICTORY</td>
+					</td>
+					<td className="card_slot">{renderColumn(game.flippedDeck, false)}</td>
+					<td className="card_slot"></td>
+					<td className="card_slot">{renderColumn(game.home1, false)}</td>
+					<td className="card_slot">{renderColumn(game.home2, false)}</td>
+					<td className="card_slot">{renderColumn(game.home3, false)}</td>
+					<td className="card_slot">{renderColumn(game.home4, false)}</td>
 				</tr>
-			) : (
+
 				<tr>
 					<td className="card_slot">{renderColumn(game.col1, true)}</td>
 					<td className="card_slot">{renderColumn(game.col2, true)}</td>
@@ -129,7 +137,19 @@ export default function Board(props: BoardProps) {
 					<td className="card_slot">{renderColumn(game.col6, true)}</td>
 					<td className="card_slot">{renderColumn(game.col7, true)}</td>
 				</tr>
+			</table>
+			{game.completed && (
+				<div
+					style={{
+						color: "#FFFFFF",
+						display: "flex",
+						justifyContent: "center",
+						fontSize: 70,
+					}}
+				>
+					Victory!!
+				</div>
 			)}
-		</table>
+		</>
 	);
 }

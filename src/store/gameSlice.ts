@@ -45,6 +45,7 @@ export const gameSlice = createSlice({
 			state.home2 = newDeck.home2;
 			state.home3 = newDeck.home3;
 			state.home4 = newDeck.home4;
+			state.completed = false;
 		},
 		//updates the status of cards to moving, so children in the stack can be moved
 		startMove: (state: Game, action: PayloadAction<StartMove>) => {
