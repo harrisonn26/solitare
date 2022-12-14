@@ -34,7 +34,7 @@ export default function Board(props: BoardProps) {
 				{column.data.map((card, i) => {
 					let top = 0;
 					if (i > 0 && cascade) {
-						if (props.width > 1300) top = i * 35;
+						if (props.width > 1300) top = i * 25;
 						else top = i * (props.width / 37);
 					}
 					const z = card.moving ? i + 20 : i;
@@ -89,7 +89,7 @@ export default function Board(props: BoardProps) {
 	return (
 		<>
 			<table className="table">
-				<tr style={{ height: 236 }}>
+				<tr>
 					<td className="card_slot">
 						<div
 							style={{

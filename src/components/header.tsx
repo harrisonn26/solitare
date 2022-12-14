@@ -8,7 +8,7 @@ export default function Header() {
 		<div style={{ width: "100%", backgroundColor: "rgba(34, 37, 41, 1)" }}>
 			<nav
 				className="navbar navbar-dark bg-dark"
-				style={{ maxWidth: 1200, margin: "0 auto" }}
+				style={{ maxWidth: 900, margin: "0 auto" }}
 			>
 				<div className="container-fluid">
 					<span className="navbar-brand mb-0 h1">Solitare</span>

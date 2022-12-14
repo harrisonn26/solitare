@@ -130,19 +130,19 @@ export function getDroppedColumn(
 	fromDeck: boolean
 ): number {
 	const width = window.innerWidth;
-	let cardHeight = 224;
+	let cardHeight = 165;
 	let dropWindow: number = 75;
 	let move: number = 0;
 	const coords: ColumnCoords = {
-		col1: 100,
-		col2: 260,
-		col3: 440,
-		col4: 610,
-		col5: 780,
-		col6: 950,
-		col7: 1120,
+		col1: 75,
+		col2: 195,
+		col3: 330,
+		col4: 458,
+		col5: 585,
+		col6: 712,
+		col7: 840,
 	};
-	if (width < 1220) {
+	if (width < 920) {
 		coords.col1 = width / 12.2;
 		coords.col2 = width / 4.7;
 		coords.col3 = width / 2.8;
