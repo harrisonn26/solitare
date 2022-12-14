@@ -1,10 +1,13 @@
 {
+	"homepage": "http://harrisonn26.github.io/solitare",
 	"name": "solitare",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-dev-server --mode development --open --hot",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"build": "webpack --mode production"
 	},
 	"repository": {
@@ -35,6 +38,7 @@
 		"@types/react-dom": "^18.0.8",
 		"babel-loader": "^9.0.0",
 		"css-loader": "^6.7.1",
+		"gh-pages": "^4.0.0",
 		"html-webpack-plugin": "^5.5.0",
 		"style-loader": "^3.3.1",
 		"ts-loader": "^9.4.1",
